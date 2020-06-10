@@ -120,7 +120,7 @@ def weak_form1(eps, N, f, u, alphas, lepolys, DX):
 			diff1 = torch.from_numpy(DX[i].reshape(DX[i].shape[1],1)).to(device).float()
 			u_x += a[i]*diff1
 		LHS[index] = eps*torch.sum(u_x*u_x*2/(N*(N+1))/(torch.square(torch.from_numpy(lepolys[N-1]).to(device).float())))
-		RHS[index] = torch.sum(f*u*2/(N*(N+1))/(torch.square(torch.from_numpy(lepolys[N-1]).to(device).float())))
+		RHS[index] = torch.sum(f[index,:]*u[index,:]*2/(N*(N+1))/(torch.square(torch.from_numpy(lepolys[N-1]).to(device).float())))
 	return LHS, RHS
 
 
